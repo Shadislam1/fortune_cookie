@@ -86,20 +86,33 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
              Text(
-              'your fortune is:'
+              'your fortune is:',
+              style: TextStyle(
+                fontSize: 19.0,
+              fontWeight: FontWeight.bold),
             ),
-            Text(
-               "${_currentFortune}",
-              style: Theme.of(context).textTheme.headlineMedium,
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                 "${_currentFortune}",
+                style: Theme.of(context).textTheme.titleMedium,
+                          ),
+              ), 
             ),
+            ElevatedButton(
+              onPressed:  _randomFortune, 
+              child: Text('Get Fortune'),
+              ),
+           
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _randomFortune,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), 
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _randomFortune,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), 
     );
   }
 }
