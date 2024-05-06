@@ -1,9 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:fortune_cookie/providers/FortuneModel.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: ( context) => FortuneModel(),
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
    MyHomePage({super.key});
    
-   String _currentFortune = "";
+  
 
  
 
@@ -38,39 +43,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  //int _counter = 0;
 
-  String _currentFortune = "";
-
-  final _fortuneList = [
-    'You will finad a new friend',
-    'You will finad a new friend tomorrow',
-    'A truly friend love you',
-    'life is awesome when you read quran'
-
-  ];
-
-  void _randomFortune(){
-    
-    var random = Random();
-   int fortune = random.nextInt(_fortuneList.length);
-   setState(() {
-      _currentFortune =_fortuneList[fortune];
-   });
-   
-   print(_currentFortune);
-  }
   
 
-  void _incrementCounter() {
-    setState(() {
+
+  
+
+  // void _incrementCounter() {
+  //   setState(() {
       
-      _counter++;
-    });
-  }
+  //     _counter++;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final  fortune = Provider.of<FortuneModel>(context);
    
     return Scaffold(
       appBar: AppBar(
@@ -102,13 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                 "${_currentFortune}",
+                fortune.currentFortune,
                 style: Theme.of(context).textTheme.titleMedium,
                           ),
               ), 
             ),
             ElevatedButton(
-              onPressed:  _randomFortune, 
+              onPressed:() => fortune.getNewFortune()  , 
               child: Text('Get Fortune'),
               ),
            
